@@ -1,14 +1,22 @@
 package msa6;
-	
+
+import java.util.LinkedList;
+
 public class Map {
 	//variable declarations
 	int livesLost;
-	//merge test
+	LinkedList<Bloon> bloons;
+	LinkedList<Projectile> projectiles;
+	LinkedList<Tower> towers;
+
 	/**
 	 * constructor
 	 */
 	public Map() {
 		livesLost = 0;
+		bloons = new LinkedList<Bloon>();
+		projectiles = new LinkedList<Projectile>();
+		towers = new LinkedList<Tower>();
 	}
 	//assuming map is 37 (horizontal length) by 27 (vertical height) (based off the diagram)
 	
