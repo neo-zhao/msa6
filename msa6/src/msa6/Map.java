@@ -3,7 +3,7 @@ package msa6;
 public class Map {
 	//variable declarations
 	int livesLost;
-	
+	//merge test
 	/**
 	 * constructor
 	 */
