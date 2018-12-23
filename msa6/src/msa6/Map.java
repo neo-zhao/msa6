@@ -8,15 +8,16 @@ public class Map {
 	LinkedList<Bloon> bloons;
 	LinkedList<Projectile> projectiles;
 	LinkedList<Tower> towers;
-
+	LinkedList<Coordinate> path;
 	/**
 	 * constructor
 	 */
-	public Map() {
+	public Map(LinkedList<Coordinate> p) {
 		livesLost = 0;
 		bloons = new LinkedList<Bloon>();
 		projectiles = new LinkedList<Projectile>();
 		towers = new LinkedList<Tower>();
+		path = p;
 	}
 	//assuming map is 37 (horizontal length) by 27 (vertical height) (based off the diagram)
 	
