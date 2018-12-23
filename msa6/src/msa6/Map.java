@@ -201,4 +201,39 @@ public class Map {
 		}
 		return rePosition;
 	}
+	
+	/**
+	 * addBloon
+	 * @param b the bloon to be add to the map
+	 */
+	public void addBloon(Bloon b) {
+		bloons.add(b);
+	}
+	
+	/**
+	 * getPath
+	 * <p></p>
+	 * @return the path on the map defined by coordinates
+	 */
+	public LinkedList<Coordinate> getPath() {
+		LinkedList<Coordinate> path = new LinkedList<Coordinate>();
+		//adding the turns (in order)
+		path.add(new Coordinate(0, 14));
+		path.add(new Coordinate(6, 14));
+		path.add(new Coordinate(6, 23));
+		path.add(new Coordinate(33, 23));
+		path.add(new Coordinate(33, 16));
+		path.add(new Coordinate(32, 16));
+		path.add(new Coordinate(32, 22));
+		path.add(new Coordinate(7, 22));
+		path.add(new Coordinate(7, 5));
+		path.add(new Coordinate(32, 5));
+		path.add(new Coordinate(32, 11));
+		path.add(new Coordinate(33, 11));
+		path.add(new Coordinate(33, 4));
+		path.add(new Coordinate(6, 4));
+		path.add(new Coordinate(6, 13));
+		path.add(new Coordinate(0, 13));
+		return path;
+	}
 }
