@@ -1,16 +1,20 @@
 package msa6;
 
+/**
+ * Coordinate
+ * Used to define locations on the map in the simulation
+ */
 public class Coordinate {
 	//variable declarations
-	double x;
-	double y;
+	int x;
+	int y;
 	
 	/**
 	 * constructor for coordinate
 	 * @param a the x value
 	 * @param b the y value
 	 */
-	public Coordinate(double a, double b) {
+	public Coordinate(int a, int b) {
 		x = a;
 		y = b;
 	}
@@ -19,7 +23,7 @@ public class Coordinate {
 	 * getX
 	 * @return the x value of the coordinate
 	 */
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 	
@@ -27,7 +31,7 @@ public class Coordinate {
 	 * getY
 	 * @return the y value of the coordinate
 	 */
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 }
