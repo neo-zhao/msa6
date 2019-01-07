@@ -12,7 +12,6 @@ public class Dart extends Projectile{
 	 * @param d the durability of the projectile
 	 * @param ra the radius (size) of the projectile
 	 */
-
 	public Dart(Coordinate po, LinkedList<Coordinate> pa, int rb, int d, double ra) {
 		super(po, pa, 400, rb, d, ra);
 	}
