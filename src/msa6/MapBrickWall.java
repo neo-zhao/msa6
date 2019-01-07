@@ -2,7 +2,7 @@ package msa6;
 
 import java.util.LinkedList;
 
-public class MapBrickWall extends Map{
+public class MapBrickWall extends GameMap{
 	//variable declarations
 	
 	/**

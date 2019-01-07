@@ -1,6 +1,6 @@
 package msa6;
 
-import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class RedBloon extends Bloon {
@@ -11,8 +11,18 @@ public class RedBloon extends Bloon {
 	 * @param rank go figure...
 	 * @param spawnTime go figure...
 	 */
-	public RedBloon(Coordinate position, LinkedList<Coordinate> path, Dictionary<String, Integer> rank, double spawnTime) {
-		super(position, path, 52, 1, 8, rank, spawnTime);
+	public RedBloon(Coordinate position, LinkedList<Coordinate> path, HashMap<String, Integer> rank, double spawnTime, int pathNumber, double distanceTraveled) {
+		super(position, path, 52, 1, 8, rank, spawnTime, pathNumber, distanceTraveled);
+	}
+	
+	/**
+	 * 
+	 * @param position
+	 * @param path
+	 * @param spawnTime
+	 */
+	public RedBloon(double spawnTime) {
+		super(null, 52, 8, 1, spawnTime);
 	}
 
 	@Override

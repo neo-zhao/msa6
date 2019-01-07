@@ -2,7 +2,7 @@ package msa6;
 
 import java.util.LinkedList;
 
-public abstract class Map {
+public abstract class GameMap {
 	//variable declarations
 	int livesLost;
 	LinkedList<Bloon> bloons;
@@ -14,7 +14,7 @@ public abstract class Map {
 	 * constructor
 	 * @param p the paths on the map
 	 */
-	public Map(LinkedList<LinkedList<Coordinate>> p) {
+	public GameMap(LinkedList<LinkedList<Coordinate>> p) {
 		livesLost = 0;
 		bloons = new LinkedList<Bloon>();
 		projectiles = new LinkedList<Projectile>();
@@ -46,4 +46,35 @@ public abstract class Map {
 		bloons.add(b);
 	}
 	
+	/**
+	 * getBloons
+	 * @return a list of all the bloons on the map
+	 */
+	public LinkedList<Bloon> getBloons() {
+		return bloons;
+	} 
+	
+	/**
+	 * getTowers
+	 * @return a list of all the towers on the map
+	 */
+	public LinkedList<Tower> getTowers() {
+		return towers;
+	}
+	
+	/**
+	 * getProjectiles
+	 * @return the projectiles on the map
+	 */
+	public LinkedList<Projectile> getProjectiles() {
+		return projectiles;
+	}
+	
+	/**
+	 * addProjectile
+	 * @param p the projectile to be added
+	 */
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
+	}
 }

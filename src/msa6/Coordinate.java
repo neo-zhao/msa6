@@ -6,15 +6,15 @@ package msa6;
  */
 public class Coordinate {
 	//variable declarations
-	int x;
-	int y;
+	double x;
+	double y;
 	
 	/**
 	 * constructor for coordinate
 	 * @param a the x value
 	 * @param b the y value
 	 */
-	public Coordinate(int a, int b) {
+	public Coordinate(double a, double b) {
 		x = a;
 		y = b;
 	}
@@ -23,7 +23,7 @@ public class Coordinate {
 	 * getX
 	 * @return the x value of the coordinate
 	 */
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	
@@ -31,7 +31,7 @@ public class Coordinate {
 	 * getY
 	 * @return the y value of the coordinate
 	 */
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 }
