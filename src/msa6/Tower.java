@@ -13,7 +13,7 @@ public abstract class Tower extends OnGameMap{
 	/**
 	 * constructor
 	 * @param po the position of the tower
-	 * @param as the attack speed of the tower
+	 * @param as the attack speed of the tower (times per second)
 	 * @param pr the priority setting of the tower
 	 * @param r the radius of the tower's attack range
 	 */

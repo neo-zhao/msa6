@@ -16,6 +16,7 @@ public class Main {
 		
 		
 		//setting up model
+		int livesLost = 0;
 		for (int i = 0; i < brickWall.getBloons().size(); i++) {
 			brickWall.getBloons().get(i).setPath(paths.get(i % paths.size()));
 			brickWall.getBloons().get(i).setPathnumber(i % paths.size());
@@ -55,6 +56,12 @@ public class Main {
 			//move bloons (check if any make it to the end of the map)
 			for (Bloon b: brickWall.getBloons()) {
 				b.update(elapsedTime);
+				for (LinkedList<Coordinate> path: paths) {
+					if (path.getLast().getX() == b.getPosition().getX() && path.getLast().getY() == b.getPosition().getY()) {
+						livesLost += b.getRbe();
+						brickWall.getBloons().remove(b);
+					}
+				}
 			}
 			
 			//update ranks of the bloons
@@ -129,5 +136,6 @@ public class Main {
 				}
 			}
 		}
+		System.out.println("Lives Lost: " + livesLost);
 	}
 }
