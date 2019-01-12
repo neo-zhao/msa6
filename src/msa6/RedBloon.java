@@ -16,7 +16,7 @@ public class RedBloon extends Bloon {
 	}
 	
 	/**
-	 * 
+	 * constructor 2
 	 * @param position
 	 * @param path
 	 * @param spawnTime

@@ -114,7 +114,7 @@ public abstract class Bloon extends Mobile{
 	public LinkedList<Double> getEncounterTimes(LinkedList<LinkedList<Double>> distances) {
 		LinkedList<Double> times = new LinkedList<Double>();
 		for (double d: distances.get(getPathNumber())) {
-			times.add(d/super.moveSpeed);
+			times.add(d/super.moveSpeed);	
 		}
 		return times;
 	}
@@ -134,5 +134,37 @@ public abstract class Bloon extends Mobile{
 	 */
 	public void setRank(String s, int i) {
 		rank.put(s, i);
+	}
+	
+	@Override
+	public void update(double t) {
+		double moveDistance = moveSpeed*t;
+		distanceTraveled += moveDistance;
+		while (moveDistance > 0) {
+			//no overshoot, and not at the next coordinate on the path
+			if (getDistance(path.getFirst(), position) > moveDistance) {
+				double ratio = moveDistance / getDistance(path.getFirst(), position);
+				double x = Math.floor(position.getX() + (path.getFirst().getX() - position.getX()) / ratio);
+				double y = Math.floor(position.getY() + (path.getFirst().getY() - position.getY()) / ratio);
+				position = new Coordinate(x, y);
+			}
+			//if the distance overshoots the next coordinate on the path or is at the next coordinate on the path
+			else {
+			moveDistance = moveDistance - getDistance(path.getFirst(), position);
+			position = path.getFirst();
+			path.removeFirst();
+			}
+		}
+	}
+	
+	public void setSpawnTime(double t) {
+		spawnTime = t;
+	}
+	
+	public boolean inRange(Tower t) {
+		if (position.getDistance(position, t.getPosition()) <= (t.getRange() + radius)) {
+			return true;
+		}
+		return false;
 	}
 }

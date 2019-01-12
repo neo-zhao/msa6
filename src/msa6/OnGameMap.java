@@ -19,6 +19,7 @@ public abstract class OnGameMap {
 	public Coordinate getPosition() {
 		return position;
 	}
+	
 	/**
 	 * getDistance
 	 * @param a the coordinate in question

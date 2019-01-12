@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 public abstract class Mobile extends OnGameMap{
 	//variable declarations
-	Coordinate position;
 	LinkedList<Coordinate> path;
 	double moveSpeed;
 	double radius;

@@ -77,4 +77,14 @@ public abstract class GameMap {
 	public void addProjectile(Projectile p) {
 		projectiles.add(p);
 	}
+	
+	public double getPathLength(int pathNumber) {
+		double pathLength = 0;
+		for (int i = 1; i < paths.get(pathNumber).size(); i++) {
+			Coordinate p1 = paths.get(pathNumber).get(i - 1);
+			Coordinate p2 = paths.get(pathNumber).get(i);
+			pathLength += p1.getDistance(p1, p2);
+		}
+		return pathLength;
+	}
 }

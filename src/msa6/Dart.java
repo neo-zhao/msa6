@@ -18,7 +18,11 @@ public class Dart extends Projectile{
 
 	@Override
 	public ProjectilePopOutput pop() {
-		super.durability --;
 		return new ProjectilePopOutput(new LinkedList<Effect>(), new LinkedList<Projectile>());
+	}
+
+	@Override
+	public void update(Bloon b) {
+		durability --;
 	}
 }

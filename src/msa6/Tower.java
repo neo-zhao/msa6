@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 public abstract class Tower extends OnGameMap{
 	//variable declarations
-	Coordinate position;
 	double attackSpeed;
 	String priority;
 	int range;
@@ -107,4 +106,9 @@ public abstract class Tower extends OnGameMap{
 		return distances;
 	}
 	
+	public double getNextAttack() {
+		return nextAttack;
+	}
+	
+	public abstract void update(double t);
 }

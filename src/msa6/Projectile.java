@@ -77,4 +77,10 @@ public abstract class Projectile extends Mobile{
 		}
 		return times;
 	}
+	
+	public void setDurability(int d) {
+		durability = d;
+	}
+	
+	public abstract void update(Bloon b); 
 }
