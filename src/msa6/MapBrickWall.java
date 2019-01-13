@@ -30,5 +30,4 @@ public class MapBrickWall extends GameMap{
 		super.paths.get(0).add(new Coordinate(94, 244));
 		super.paths.get(0).add(new Coordinate(0, 244));
 	}
-	
 }

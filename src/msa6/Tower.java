@@ -110,5 +110,10 @@ public abstract class Tower extends OnGameMap{
 		return nextAttack;
 	}
 	
-	public abstract void update(double t);
+	public void update(double t) {
+		nextAttack -= t;
+		if (nextAttack < 0) {
+			nextAttack = 0;
+		}
+	}
 }

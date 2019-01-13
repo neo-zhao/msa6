@@ -54,7 +54,10 @@ public abstract class Mobile extends OnGameMap{
 	 * @param p the new path the bloon will take
 	 */
 	public void setPath(LinkedList<Coordinate> p) {
-		path = p;
+		path = new LinkedList<Coordinate>();
+		for(Coordinate c: p) {
+			path.add(c);
+		}
 	}
 	
 	/**

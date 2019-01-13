@@ -33,12 +33,4 @@ public class DartMonkey00 extends Tower{
 		nextAttack = attackSpeed/1;
 		return projectiles;
 	}
-
-	@Override
-	public void update(double t) {
-		nextAttack -= t;
-		if (nextAttack < 0) {
-			nextAttack = 0;
-		}
-	}
 }
