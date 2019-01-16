@@ -1,5 +1,9 @@
 package msa6;
 
+/**
+ * Coordinate
+ * Used to define locations on the map in the simulation
+ */
 public class Coordinate {
 	//variable declarations
 	double x;
@@ -29,5 +33,23 @@ public class Coordinate {
 	 */
 	public double getY() {
 		return y;
+	}
+	
+	/**
+	 * getDistance
+	 * @param a the coordinate in question
+	 * @return the distance between the two coordinates
+	 */
+	public double getDistance(Coordinate a, Coordinate b) {
+		//just Distance formula
+		return Math.sqrt(Math.pow(b.getX() - a.getX(), 2) + Math.pow(b.getY() - a.getY() , 2));
+	}
+	
+	public void setX(double xValue) {
+		x = xValue;
+	}
+	
+	public void setY(double yValue) {
+		y = yValue;
 	}
 }
