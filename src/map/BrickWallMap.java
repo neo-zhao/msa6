@@ -1,7 +1,10 @@
-package msa6;
+package map;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import framework.GameMap;
+import framework.MiscHelper;
 
 public class BrickWallMap extends GameMap {
 	
