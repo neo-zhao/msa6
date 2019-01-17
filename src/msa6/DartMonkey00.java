@@ -15,22 +15,22 @@ public class DartMonkey00 extends Tower{
 	@Override
 	public LinkedList<Projectile> update(LinkedList<Bloon> bloons, double t) {
 		LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
-		nextAttack -= t;
-		if (nextAttack <=0) {
+		setNextAttack(getNextAttack() - t);
+		if (getNextAttack() <=0) {
 			Bloon target = bloons.getFirst();
 			
 			for (Bloon b: bloons) {
-				if (b.getRank(super.priority) < target.getRank(super.priority)) {
+				if (b.getRank(getPriority()) < target.getRank(getPriority())) {
 					target = b;
 				}
 			}
 			LinkedList<Coordinate> path = new LinkedList<Coordinate>();
-			double x = target.getPosition().getX() - super.position.getX();
-			double y = target.getPosition().getY() - super.position.getY();
-			path.add(new Coordinate(super.getPosition().getX() + x*1000, super.getPosition().getY() + y*1000));
-			projectiles.add(new Dart(super.position, path, 1, 1, 5));
+			double x = target.getPosition().getX() - getPosition().getX();
+			double y = target.getPosition().getY() - getPosition().getY();
+			path.add(new Coordinate(getPosition().getX() + x*1000, getPosition().getY() + y*1000));
+			projectiles.add(new Dart(getPosition(), path, 1, 1, 5));
 		}
-		nextAttack = attackSpeed/1;
+		setNextAttack(getAttackSpeed()/1);
 		return projectiles;
 	}
 }

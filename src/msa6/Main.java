@@ -16,9 +16,8 @@ public class Main {
 		brickWall.addTower(new DartMonkey00(new Coordinate(169, 259), "FIRST"));
 
 		// adding bloons (create new bloons here; add to bloonList)
-		for (int i = 0; i < 10; i++) {
-			bloonList.add(new RedBloon(i));
-		}
+		bloonList.add(new RedBloon(0));
+		//bloonList.add(new RedBloon(1));
 
 		// SETTING UP THE SIM
 		Set<Double> eventList = new HashSet<Double>();
@@ -93,10 +92,7 @@ public class Main {
 					// add all the times the bloon enters tower radius to the eventList
 					for (Tower t : brickWall.getTowers()) {
 						for (double d : t.getPathIntersectionDistance(brickWall.getPaths()).get(b.getPathNumber())) {
-							// add new event time only if it's not already in the eventList
-							if (!eventList.contains(b.getSpawnTime())) {
-								eventList.add(d / b.getMoveSpeed());
-							}
+							eventList.add(d / b.getMoveSpeed());
 						}
 					}
 					spawnedBloons.add(b);
@@ -248,6 +244,5 @@ public class Main {
 		}
 		// display livesLost
 		System.out.println("Lives Lost: " + livesLost);
->>>>>>> refs/remotes/origin/pixels
 	}
 }

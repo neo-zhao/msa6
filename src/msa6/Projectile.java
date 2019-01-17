@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public abstract class Projectile extends Mobile{
 	//variable declarations
-	int rbePop;
-	int durability;
+	private int rbePop;
+	private int durability;
 	
 	/**
 	 * constructor
@@ -17,7 +17,10 @@ public abstract class Projectile extends Mobile{
 	 * @param ra the radius (size) of the projectile
 	 */
 	public Projectile(Coordinate po, LinkedList<Coordinate> pa, double ms, int rb, int d, double ra) {
+		//uses contructor of Mobile
 		super(po, pa, ms, ra);
+		
+		//initialize other variables
 		rbePop = rb;
 		durability = d;
 	}
@@ -55,7 +58,7 @@ public abstract class Projectile extends Mobile{
 				Coordinate mp1 = path.get(j);
 				double mSlope = (mp1.getY() - mp0.getY())/(mp1.getX() - mp0.getX());
 				//making the line equation of the projectile
-				for (int k = 1; k < super.path.size(); k++) {
+				for (int k = 1; k < super.getPath().size(); k++) {
 					Coordinate pp0 = path.get(k - 1);
 					Coordinate pp1 = path.get(k);
 					double pSlope = (pp1.getY() - pp0.getY())/(pp1.getX() - pp0.getX());
@@ -66,8 +69,8 @@ public abstract class Projectile extends Mobile{
 						if (!((y < mp0.getY() && y < mp1.getY()) || (y > mp0.getY() && y > mp1.getY()))) {
 							if(!((x < pp0.getX() && x < pp1.getX()) || (x > pp0.getX() && x > pp1.getX()))) {
 								if (!((y < mp0.getY() && y < pp1.getY()) || (y > mp0.getY() && y > pp1.getY()))) {
-									double distance = getDistance(position, new Coordinate(x,y));
-									times.add(distance / moveSpeed);
+									double distance = getDistance(getPosition(), new Coordinate(x,y));
+									times.add(distance / getMoveSpeed());
 								}
 							}
 						}

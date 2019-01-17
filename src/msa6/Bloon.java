@@ -5,12 +5,11 @@ import java.util.HashMap;
 
 public abstract class Bloon extends Mobile {
 	// variable declarations
-	int rbe;
-	HashMap<String, Integer> rank;
-	double spawnTime;
-	LinkedList<Effect> effects;
-	int pathNumber;
-	double distanceTraveled;
+	private int rbe;
+	private HashMap<String, Integer> rank;
+	private double spawnTime;
+	private LinkedList<Effect> effects;
+	private int pathNumber;
 
 	/**
 	 * constructor default
@@ -27,17 +26,19 @@ public abstract class Bloon extends Mobile {
 	 */
 	public Bloon(Coordinate po, LinkedList<Coordinate> pa, double ms, int rb, double rad, HashMap<String, Integer> ran,
 			double st, int pn, double d) {
+		//uses constructor for Mobile
 		super(po, pa, ms, rad);
+		
+		//initialize other variables
 		rbe = rb;
 		rank = ran;
 		spawnTime = st;
 		effects = new LinkedList<Effect>();
 		pathNumber = pn;
-		distanceTraveled = d;
 	}
 
 	/**
-	 * constructor 2
+	 * constructor 2 (the easier one)
 	 * 
 	 * @param pa  the path the bloon must take
 	 * @param ms  the move speed of the bloon
@@ -46,21 +47,27 @@ public abstract class Bloon extends Mobile {
 	 * @param st  the spawn time for the bloon
 	 */
 	public Bloon(LinkedList<Coordinate> pa, double ms, double rad, int rb, double st) {
+		//uses constructor for Mobile
 		super(null, pa, ms, rad);
+		
+		//initialize other variables
 		rbe = rb;
 		rank = new HashMap<String, Integer>();
 		spawnTime = st;
 		pathNumber = 0;
-		distanceTraveled = 0;
 	}
 
+	//Abstract Methods
+	
 	/**
 	 * pop
 	 * 
 	 * @return bloons to be added to the map after this bloon is popped
 	 */
 	public abstract LinkedList<Bloon> pop(Projectile p);
-
+	
+	//Getters and Setters
+	
 	/**
 	 * getRbe
 	 * 
@@ -69,7 +76,7 @@ public abstract class Bloon extends Mobile {
 	public int getRbe() {
 		return rbe;
 	}
-
+	
 	/**
 	 * getRank
 	 * 
@@ -78,66 +85,6 @@ public abstract class Bloon extends Mobile {
 	 */
 	public Integer getRank(String s) {
 		return rank.get(s);
-	}
-
-	/**
-	 * getSpawnTime
-	 * 
-	 * @return the spawnTime of the bloon
-	 */
-	public double getSpawnTime() {
-		return spawnTime;
-	}
-
-	/**
-	 * addEffect
-	 * 
-	 * @param e
-	 */
-	public void addEffect(Effect e) {
-		effects.add(e);
-	}
-
-	/**
-	 * setPathNumber
-	 * 
-	 * @param i the new path number for the bloon
-	 */
-	public void setPathnumber(int i) {
-		pathNumber = i;
-	}
-
-	/**
-	 * getPathNumber
-	 * 
-	 * @return the path number of the bloon
-	 */
-	public int getPathNumber() {
-		return pathNumber;
-	}
-
-	/**
-	 * getEncounterTimes
-	 * 
-	 * @param distances the distances the bloon has to travel (from the start of the
-	 *                  map) to get in range of a tower
-	 * @return the time it takes to reach a tower
-	 */
-	public LinkedList<Double> getEncounterTimes(LinkedList<LinkedList<Double>> distances) {
-		LinkedList<Double> times = new LinkedList<Double>();
-		for (double d : distances.get(getPathNumber())) {
-			times.add(d / super.moveSpeed);
-		}
-		return times;
-	}
-
-	/**
-	 * getDistanceTraveled
-	 * 
-	 * @return the distance traveled by the bloon
-	 */
-	public double getDistanceTraveled() {
-		return distanceTraveled;
 	}
 
 	/**
@@ -150,34 +97,70 @@ public abstract class Bloon extends Mobile {
 		rank.put(s, i);
 	}
 
-	@Override
-	public void update(double t) {
-		double moveDistance = moveSpeed * t;
-		distanceTraveled += moveDistance;
-		while (moveDistance > 0) {
-			if (getDistance(path.getFirst(), position) > moveDistance) {
-				// no overshoot, and not at the next coordinate on the path
-				moveDistance -= getDistance(path.getFirst(), position);
-				double ratio = moveDistance / getDistance(path.getFirst(), position);
-				double x = Math.floor(position.getX() + (path.getFirst().getX() - position.getX()) / ratio);
-				double y = Math.floor(position.getY() + (path.getFirst().getY() - position.getY()) / ratio);
-				position = new Coordinate(x, y);
-			} else {
-				// if the distance overshoots the next coordinate on the path or is at the next
-				// coordinate on the path
-				moveDistance -= getDistance(path.getFirst(), position);
-				position = path.getFirst();
-				path.removeFirst();
-			}
-		}
+	/**
+	 * getSpawnTime
+	 * 
+	 * @return the spawnTime of the bloon
+	 */
+	public double getSpawnTime() {
+		return spawnTime;
 	}
-
+	
+	/**
+	 * setSpawnTime
+	 * 
+	 * @param t the spawn time of the bloon
+	 */
 	public void setSpawnTime(double t) {
 		spawnTime = t;
 	}
+	
+	/**
+	 * getPathNumber
+	 * 
+	 * @return the path number of the bloon
+	 */
+	public int getPathNumber() {
+		return pathNumber;
+	}
+
+	/**
+	 * setPathNumber
+	 * 
+	 * @param i the new path number for the bloon
+	 */
+	public void setPathnumber(int i) {
+		pathNumber = i;
+	}
+	
+	//Other Methods
+
+	/**
+	 * addEffect
+	 * 
+	 * @param e
+	 */
+	public void addEffect(Effect e) {
+		effects.add(e);
+	}
+
+	/**
+	 * getEncounterTimes
+	 * 
+	 * @param distances the distances the bloon has to travel (from the start of the
+	 *                  map) to get in range of a tower
+	 * @return the time it takes to reach a tower
+	 */
+	public LinkedList<Double> getEncounterTimes(LinkedList<LinkedList<Double>> distances) {
+		LinkedList<Double> times = new LinkedList<Double>();
+		for (double d : distances.get(getPathNumber())) {
+			times.add(d / super.getMoveSpeed());
+		}
+		return times;
+	}
 
 	public boolean inRange(Tower t) {
-		if (position.getDistance(position, t.getPosition()) <= (t.getRange() + radius)) {
+		if (getPosition().getDistance(getPosition(), t.getPosition()) <= (t.getRange() + getRadius())) {
 			return true;
 		}
 		return false;

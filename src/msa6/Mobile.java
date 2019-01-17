@@ -4,15 +4,28 @@ import java.util.LinkedList;
 
 public abstract class Mobile extends OnGameMap{
 	//variable declarations
-	LinkedList<Coordinate> path;
-	double moveSpeed;
-	double radius;
+	private LinkedList<Coordinate> path;
+	private double moveSpeed;
+	private double radius;
+	private int moveIndex;
+	private double distanceTraveled;
 	
+	/**
+	 * constructor default
+	 * @param po the position of the mobile object
+	 * @param pa the path the mobile object will take
+	 * @param ms the move speed of the object
+	 * @param r the radius (size) of the object
+	 */
 	public Mobile(Coordinate po, LinkedList<Coordinate> pa, double ms, double r) {
+		//uses constructor of OnGameMap
 		super(po);
+		//other variables
 		path = pa;
 		moveSpeed = ms;
 		radius = r;
+		moveIndex =0;
+		distanceTraveled = 0;
 	}
 	
 	/**
@@ -22,20 +35,21 @@ public abstract class Mobile extends OnGameMap{
 	 */
 	public void update(double t) {
 		double moveDistance = moveSpeed*t;
+		distanceTraveled += moveDistance;
 		while (moveDistance > 0) {
 			//no overshoot, and not at the next coordinate on the path
-			if (getDistance(path.getFirst(), position) > moveDistance) {
-				double ratio = moveDistance / getDistance(path.getFirst(), position);
-				double x = Math.floor(position.getX() + (path.getFirst().getX() - position.getX()) / ratio);
-				double y = Math.floor(position.getY() + (path.getFirst().getY() - position.getY()) / ratio);
-				position = new Coordinate(x, y);
+			if (getDistance(path.get(moveIndex), getPosition()) > moveDistance) {
+				double ratio = moveDistance / getDistance(path.get(moveIndex), getPosition());
+				double x = Math.floor(getPosition().getX() + (path.get(moveIndex).getX() - getPosition().getX()) / ratio);
+				double y = Math.floor(getPosition().getY() + (path.get(moveIndex).getY() - getPosition().getY()) / ratio);
+				setPosition(new Coordinate(x, y));
 			}
 			//if the distance overshoots the next coordinate on the path or is at the next coordinate on the path
 			else {
-			moveDistance = moveDistance - getDistance(path.getFirst(), position);
-			position = path.getFirst();
-			path.removeFirst();
+				setPosition(path.get(moveIndex));
+				moveIndex ++;
 			}
+			moveDistance -= getDistance(path.getFirst(), getPosition());
 		}
 	}
 		
@@ -54,10 +68,7 @@ public abstract class Mobile extends OnGameMap{
 	 * @param p the new path the bloon will take
 	 */
 	public void setPath(LinkedList<Coordinate> p) {
-		path = new LinkedList<Coordinate>();
-		for(Coordinate c: p) {
-			path.add(c);
-		}
+		path = p;
 	}
 	
 	/**
@@ -69,7 +80,7 @@ public abstract class Mobile extends OnGameMap{
 	}
 	
 	/**
-	 * getMove Speed
+	 * getMoveSpeed
 	 * @return the move speed of the mobile object
 	 */
 	public double getMoveSpeed() {
@@ -77,10 +88,11 @@ public abstract class Mobile extends OnGameMap{
 	}
 	
 	/**
-	 * setPosition
-	 * @param c the new position of the mobile object
+	 * getDistanceTraveled
+	 * 
+	 * @return the distance traveled by the bloon
 	 */
-	public void setPosition(Coordinate c) {
-		position = c;
+	public double getDistanceTraveled() {
+		return distanceTraveled;
 	}
 }

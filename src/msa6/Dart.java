@@ -23,6 +23,6 @@ public class Dart extends Projectile{
 
 	@Override
 	public void update(Bloon b) {
-		durability --;
+		setDurability(getDurability() - 1);
 	}
 }

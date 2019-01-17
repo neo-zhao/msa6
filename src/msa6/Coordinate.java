@@ -6,8 +6,8 @@ package msa6;
  */
 public class Coordinate {
 	//variable declarations
-	double x;
-	double y;
+	private double x;
+	private double y;
 	
 	/**
 	 * constructor for coordinate
