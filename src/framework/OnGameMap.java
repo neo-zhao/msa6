@@ -1,18 +1,41 @@
 package framework;
 
-import java.awt.geom.Point2D;
-
 public class OnGameMap {
 	//variable declarations
-	private Point2D.Double position;
+	private Coordinate position;
 	
 	//CONSTRUSTORS
 		
-	public OnGameMap(Point2D.Double position) {
+	public OnGameMap(Coordinate position) {
 		this.position = position;
 	}
 	
 	//GETTERS AND SETTERS
+	
+	/**
+	 * getPosition
+	 * @return the position of the game object
+	 */
+	public Coordinate getPosition() {
+		return position;
+	}
+	
+	/**
+	 * setPosition (point)
+	 * @param position the new position of the game object (as a point)
+	 */
+	public void setPosition(Coordinate position) {
+		this.position = position;
+	}
+	
+	/**
+	 * setPosition (doubles)
+	 * @param x the x value of the new position
+	 * @param y the y value of the new position
+	 */
+	public void setPosition(double x, double y) {
+		this.position.setLocation(x, y);
+	}
 	
 	//OTHER METHODS
 }

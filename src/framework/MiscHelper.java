@@ -5,7 +5,7 @@ public class MiscHelper {
 	
 	/*map dimensions*/
 	private final static double mapLength = 700;
-	private final static double mapHeight = 520/700*mapLength;
+	private final static double mapHeight = 520.0/700.0*mapLength;
 	
 	/*towers*/
 	
@@ -14,6 +14,11 @@ public class MiscHelper {
 	private final static String last = "LAST";
 	private final static String strong = "STRONG";
 	private final static String close = "CLOSE";
+	
+	/*bloons*/
+	
+	//resistances
+	private final static String lead = "LEAD";
 	
 	//**GETTERS AND SETTERS**//
 	
@@ -63,6 +68,17 @@ public class MiscHelper {
 	 */
 	public static String getPriorityClose() {
 		return close;
+	}
+	
+	/*bloons*/
+	
+	//resistances
+	/**
+	 * getResistanceLead
+	 * @return the string that represents the resistance lead
+	 */
+	public static String getResistanceLead() {
+		return lead;
 	}
 	
 	//**OTHER METHODS**//
