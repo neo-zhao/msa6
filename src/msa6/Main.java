@@ -30,21 +30,24 @@ public class Main {
 		GameMap brickWall = new BrickWallMap();
 		
 		//add Towers
-		brickWall.addTower(new DartMonkey00(new Coordinate(205/700*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst()));
+		brickWall.addTower(new DartMonkey00(new Coordinate(150.0/700.0*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst()));
 		
 		//*add Bloons*//
-		bloonList.add(new RedBloon(0));
+		for (int i = 0; i < 5; i++) {
+			bloonList.add(new RedBloon(i));
+		}
 		
 		//initializing values for the bloons and finding maxSpawnTime
 		for (int i = 0; i < bloonList.size(); i++) {
 			int pathNumber = i%brickWall.getPaths().size();
 			bloonList.get(i).setPathNumber(pathNumber);
 			bloonList.get(i).setPath(brickWall.getPaths().get(pathNumber));
-			bloonList.get(i).setPosition(brickWall.getPaths().get(pathNumber).get(0));
+			bloonList.get(i).setPosition(brickWall.getPaths().get(pathNumber).get(0).clone());
 		}
 		
 		//**Run Sim**//
-		for (int time = 0; !bloonList.isEmpty() || !brickWall.getBloons().isEmpty(); time += elapsedTime) {
+		for (double time = 0; !bloonList.isEmpty() || !brickWall.getBloons().isEmpty(); time += elapsedTime) {
+			System.out.println(time + " " + brickWall.getProjectiles().size());
 			
 			//*Updating Bloons*//
 			
@@ -70,44 +73,55 @@ public class Main {
 				brickWall.addBloon(b);
 			}
 			
-			//*Updating Projectiles*//
-			for (int j = 0; j < brickWall.getProjectiles().size(); j++) {
-				Projectile projectile = brickWall.getProjectiles().get(j);
+			//*Updating Projectiles and Bloons*//
+			LinkedList<Projectile> projectilesToBeRemoved = new LinkedList<Projectile>();
+			LinkedList<Projectile> projectilesToBeAdded = new LinkedList<Projectile>();
+			for (Projectile p: brickWall.getProjectiles()) {
 				//move projectiles
-				projectile.move(elapsedTime);
+				p.move(elapsedTime);
 				
-				//if the projectile comes in contact with a bloon
-				for (int k = 0; k < brickWall.getBloons().size(); k++) {
-					Bloon bloon = brickWall.getBloons().get(k);
-					if (projectile.getPosition().distance(bloon.getPosition()) <= (projectile.getRadius() + bloon.getRadius())) {
-						//updating projectiles
-						for (Projectile p: projectile.pop(bloon)) {
-							brickWall.addProjectile(p);
-						}
-						if(projectile.getDurability() == 0) {
-							brickWall.getProjectiles().remove(projectile);
-							j--;
-						}
-						
-						//updating bloons
-						brickWall.getBloons().remove(bloon);
-						k--;
-						for (Bloon b: bloon.pop(projectile).getBloons()) {
-							brickWall.addBloon(b);
-						}
-						for (Projectile p: bloon.pop(projectile).getProjectiles()) {
-							brickWall.addProjectile(p);
-						}
+				//finding bloons that the Projectile has hit
+				LinkedList<Bloon> hitBloons = new LinkedList<Bloon>();
+				for (Bloon b: brickWall.getBloons()) {
+					if (p.getPosition().distance(b.getPosition()) <= (p.getRadius() + b.getRadius())) {
+						hitBloons.add(b);
+					}
+				}
+				
+				//"popping" the bloons
+				for (Bloon b: hitBloons) {
+					//updating bloons
+					brickWall.getBloons().remove(b);
+					for (Bloon b1: b.pop(p).getBloons()) {
+						brickWall.addBloon(b1);
+					}
+					for (Projectile p1: b.pop(p).getProjectiles()) {
+						brickWall.addProjectile(p1);
+					}
+					
+					//updating projectiles
+					for (Projectile p1: p.pop(b)) {
+						projectilesToBeAdded.add(p1);
+					}
+					if(p.getDurability() <= 0) {
+						projectilesToBeRemoved.add(p);
+						break;
 					}
 				}
 				
 				//check if projectiles are out of bounds
-				if (brickWall.outOfBounds(projectile.getPosition())) {
-					brickWall.getProjectiles().remove(projectile);
-					j--;
+				if (brickWall.outOfBounds(p.getPosition())) {
+					projectilesToBeRemoved.add(p);	
 				}
 			}
-						
+			//removing and adding the projectiles that need to be removed or added
+			for (Projectile p: projectilesToBeRemoved) {
+				brickWall.getProjectiles().remove(p);
+			}
+			for (Projectile p: projectilesToBeAdded) {
+				brickWall.getProjectiles().add(p);
+			}
+			
 			//*Updating Bloon Rank*//
 			int bloonNumber = brickWall.getBloons().size();
 			LinkedList<Bloon> ranked = new LinkedList<Bloon>();

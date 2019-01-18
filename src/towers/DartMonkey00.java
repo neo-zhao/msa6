@@ -41,6 +41,7 @@ public class DartMonkey00 extends Tower{
 				}
 			}
 			ArrayList<Coordinate> path = new ArrayList<Coordinate>();
+			path.add(getPosition());
 			path.add(extendPath(target));
 			projectiles.add(new Dart(getPosition(), 1, path));
 		}

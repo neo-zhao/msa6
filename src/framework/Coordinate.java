@@ -31,4 +31,12 @@ public class Coordinate {
 	public double distance(Coordinate coordinate) {
 		return Math.sqrt(Math.pow(coordinate.getX() - x, 2) + Math.pow(coordinate.getY() - y, 2));
 	}
+	
+	public Coordinate clone() {
+		return new Coordinate(x, y);
+	}
+	
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
 }

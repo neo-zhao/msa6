@@ -79,7 +79,9 @@ public class Mobile extends OnGameMap{
 				setPosition(path.get(pathIndex));
 				pathIndex ++;
 			}
-			moveDistance -= getPosition().distance(path.get(pathIndex));
+//			System.out.println(getPosition().toString());
+//			System.out.println(pathIndex);
+			moveDistance -= getPosition().distance(path.get(pathIndex - 1));
 		}
 	}
 }

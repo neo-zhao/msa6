@@ -34,7 +34,7 @@ public class OnGameMap {
 	 * @param y the y value of the new position
 	 */
 	public void setPosition(double x, double y) {
-		this.position.setLocation(x, y);
+		this.position = new Coordinate(x, y);
 	}
 	
 	//OTHER METHODS
