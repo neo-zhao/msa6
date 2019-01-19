@@ -24,17 +24,17 @@ public class Main {
 		
 		int livesLost = 0;
 		LinkedList<Bloon> bloonList = new LinkedList<Bloon>();
-		double elapsedTime = 0.01;
+		double elapsedTime = 0.001;
 		
 		//create map
 		GameMap brickWall = new BrickWallMap();
 		
 		//add Towers
-		brickWall.addTower(new DartMonkey00(new Coordinate(150.0/700.0*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst()));
+		brickWall.addTower(new DartMonkey00(new Coordinate(205.0/700.0*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst()));
 		
 		//*add Bloons*//
-		for (int i = 0; i < 5; i++) {
-			bloonList.add(new RedBloon(i));
+		for (int i = 0; i < 10; i++) {
+			bloonList.add(new RedBloon(i*5));
 		}
 		
 		//initializing values for the bloons and finding maxSpawnTime
