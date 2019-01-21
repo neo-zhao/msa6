@@ -11,8 +11,8 @@ public class Dart extends Projectile{
 	//variable declarations
 	
 	//CONSTRUCTORS
-	public Dart(Coordinate position, int durability, ArrayList<Coordinate> path) {
-		super(position, 400.0/700.0*MiscHelper.getMapLength(), 5.0/700.0*MiscHelper.getMapLength(), 1, durability, path);
+	public Dart(Coordinate position, int durability, ArrayList<Coordinate> path, String ID) {
+		super(position, 400.0/700.0*MiscHelper.getMapLength(), 5.0/700.0*MiscHelper.getMapLength(), 1, durability, path, "Dart" + ID);
 	}
 	
 	//GETTERS AND SETTERS

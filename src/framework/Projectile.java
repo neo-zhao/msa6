@@ -8,17 +8,20 @@ public abstract  class Projectile extends Mobile {
 	private int instantPopCount;
 	private int durability;
 	private HashSet<Effect> effects;
+	private String ID;
 	
 	//CONSTRUCTORS
-	public Projectile(Coordinate position, double moveSpeed, double radius, int instantPopCount, int durability) {
+	public Projectile(Coordinate position, double moveSpeed, double radius, int instantPopCount, int durability, String ID) {
 		super(position, moveSpeed, radius);
 		this.instantPopCount = instantPopCount;
 		this.durability = durability;
+		this.ID = ID;
 	}
-	public Projectile(Coordinate position, double moveSpeed, double radius, int instantPopCount, int durability, ArrayList<Coordinate> path) {
+	public Projectile(Coordinate position, double moveSpeed, double radius, int instantPopCount, int durability, ArrayList<Coordinate> path, String ID) {
 		super(position, moveSpeed, radius, path);
 		this.instantPopCount = instantPopCount;
 		this.durability = durability;
+		this.ID = ID;
 	}
 	
 	//GETTERS AND SETTERS
@@ -49,6 +52,13 @@ public abstract  class Projectile extends Mobile {
 	 */
 	public HashSet<Effect> getEffects(){
 		return effects;
+	}
+	/**
+	 * getID
+	 * @return the Id of the Projectile
+	 */
+	public String getID() {
+		return ID;
 	}
 	
 	//OTHER METHODS

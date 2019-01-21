@@ -1,5 +1,8 @@
 package msa6;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 import bloons.RedBloon;
@@ -17,24 +20,26 @@ public class Main {
 	/**
 	 * Main function (The Sim is run in here)
 	 * @param args not used
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		//**Set Up Sim**//
 		
 		int livesLost = 0;
 		LinkedList<Bloon> bloonList = new LinkedList<Bloon>();
 		double elapsedTime = 0.001;
+		FileWriter eventWriter = new FileWriter(new File ("EventLog.txt"));
 		
 		//create map
 		GameMap brickWall = new BrickWallMap();
 		
 		//add Towers
-		brickWall.addTower(new DartMonkey00(new Coordinate(205.0/700.0*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst()));
+		brickWall.addTower(new DartMonkey00(new Coordinate(205.0/700.0*MiscHelper.getMapLength(), MiscHelper.getMapHeight()/2), MiscHelper.getPriorityFirst(), "1"));
 		
 		//*add Bloons*//
 		for (int i = 0; i < 10; i++) {
-			bloonList.add(new RedBloon(i*5));
+			bloonList.add(new RedBloon(i, "" + i));
 		}
 		
 		//initializing values for the bloons and finding maxSpawnTime
@@ -47,7 +52,7 @@ public class Main {
 		
 		//**Run Sim**//
 		for (double time = 0; !bloonList.isEmpty() || !brickWall.getBloons().isEmpty(); time += elapsedTime) {
-			System.out.println(time + " " + brickWall.getProjectiles().size());
+			//eventWriter.write(" ");
 			
 			//*Updating Bloons*//
 			
@@ -55,17 +60,20 @@ public class Main {
 			for (int j = 0; j < brickWall.getBloons().size(); j++) {
 				Bloon b = brickWall.getBloons().get(j);
 				b.move(elapsedTime);
+				//eventWriter.write("\t Bloon " + b.getID() + " moves to " + b.getPosition().toString() + "\n");
 				if (brickWall.outOfBounds(b.getPosition())) {
 					livesLost += b.getRbeValue();
 					brickWall.getBloons().remove(b);
+					eventWriter.write("t: " + time + ", Bloon " + b.getID() + " leaves unscathed\n");
 				}
 			}
 			
 			//spawn new bloons
 			LinkedList<Bloon> spawnedBloons = new LinkedList<Bloon>();
 			for (Bloon b: bloonList) {
-				if (b.getSpawnTime() >= time) {
+				if (b.getSpawnTime() <= time) {
 					spawnedBloons.add(b);
+					eventWriter.write("t: " + time +", Bloon " + b.getID() + " spawns at " + b.getPosition().toString() + "\n");
 				}
 			}
 			for (Bloon b: spawnedBloons) {
@@ -79,12 +87,14 @@ public class Main {
 			for (Projectile p: brickWall.getProjectiles()) {
 				//move projectiles
 				p.move(elapsedTime);
+				//eventWriter.write("\t Projectile " + p.getID() + " moves to " + p.getPosition().toString() + "\n");
 				
 				//finding bloons that the Projectile has hit
 				LinkedList<Bloon> hitBloons = new LinkedList<Bloon>();
 				for (Bloon b: brickWall.getBloons()) {
 					if (p.getPosition().distance(b.getPosition()) <= (p.getRadius() + b.getRadius())) {
 						hitBloons.add(b);
+						eventWriter.write("t: " + time + ", Projectile " + p.getID() + " hits " + b.getID() + "\n");
 					}
 				}
 				
@@ -193,14 +203,16 @@ public class Main {
 					// if there are bloons in range
 					for (Projectile p : t.update(inRange, elapsedTime)) {
 						brickWall.addProjectile(p);
+						eventWriter.write("t: " + time + ", Tower " + t.getID() + " summons " + p.getID() + "\n");
 					}
 				} else {
 					// if there are no bloons in range, still update tower
 					t.update(elapsedTime);
 				}
 			}
+			//eventWriter.write("------------------------------------------------\n");
 		}
-		
+		eventWriter.close();
 		System.out.println("Lives Lost: " + livesLost);
 	}
 }

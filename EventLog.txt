@@ -1,0 +1,30 @@
+t: 0.0, Bloon Red0 spawns at (0.0, 264.0)
+t: 1.0000000000000007, Bloon Red1 spawns at (0.0, 264.0)
+t: 2.0009999999998906, Bloon Red2 spawns at (0.0, 264.0)
+t: 2.2639999999998617, Tower DartMonkey1 summons Dart0DartMonkey1
+t: 2.522999999999833, Projectile Dart0DartMonkey1 hits Red0
+t: 3.0009999999997805, Bloon Red3 spawns at (0.0, 264.0)
+t: 3.2639999999997515, Tower DartMonkey1 summons Dart1DartMonkey1
+t: 3.522999999999723, Projectile Dart1DartMonkey1 hits Red1
+t: 4.000999999999671, Bloon Red4 spawns at (0.0, 264.0)
+t: 4.264999999999759, Tower DartMonkey1 summons Dart2DartMonkey1
+t: 4.5239999999998455, Projectile Dart2DartMonkey1 hits Red2
+t: 5.000000000000004, Bloon Red5 spawns at (0.0, 264.0)
+t: 5.265000000000093, Tower DartMonkey1 summons Dart3DartMonkey1
+t: 5.524000000000179, Projectile Dart3DartMonkey1 hits Red3
+t: 6.000000000000338, Bloon Red6 spawns at (0.0, 264.0)
+t: 6.265000000000427, Tower DartMonkey1 summons Dart4DartMonkey1
+t: 6.524000000000513, Projectile Dart4DartMonkey1 hits Red4
+t: 7.000000000000672, Bloon Red7 spawns at (0.0, 264.0)
+t: 7.2640000000007605, Tower DartMonkey1 summons Dart5DartMonkey1
+t: 7.523000000000847, Projectile Dart5DartMonkey1 hits Red5
+t: 8.000000000001005, Bloon Red8 spawns at (0.0, 264.0)
+t: 8.264000000000859, Tower DartMonkey1 summons Dart6DartMonkey1
+t: 8.523000000000716, Projectile Dart6DartMonkey1 hits Red6
+t: 9.000000000000451, Bloon Red9 spawns at (0.0, 264.0)
+t: 9.264000000000305, Tower DartMonkey1 summons Dart7DartMonkey1
+t: 9.523000000000161, Projectile Dart7DartMonkey1 hits Red7
+t: 10.26399999999975, Tower DartMonkey1 summons Dart8DartMonkey1
+t: 10.522999999999607, Projectile Dart8DartMonkey1 hits Red8
+t: 11.263999999999196, Tower DartMonkey1 summons Dart9DartMonkey1
+t: 11.522999999999053, Projectile Dart9DartMonkey1 hits Red9

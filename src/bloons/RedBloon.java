@@ -13,8 +13,8 @@ public class RedBloon extends Bloon{
 	
 	//CONSTRUCTORS
 	
-	public RedBloon(double spawnTime) {
-		super(spawnTime, 67.0/700.0*MiscHelper.getMapLength(), 10.0/700.0*MiscHelper.getMapLength(), new HashSet<String>(), 1, 0);
+	public RedBloon(double spawnTime, String ID) {
+		super(spawnTime, 42.0/700.0*MiscHelper.getMapLength(), 10.0/700.0*MiscHelper.getMapLength(), new HashSet<String>(), 1, 0, "Red" + ID);
 	}
 	
 	//GETTERS AND SETTERS

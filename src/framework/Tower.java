@@ -9,15 +9,19 @@ public abstract class Tower extends OnGameMap{
 	private double range;
 	private double attackSpeed; //attacks per second
 	private double nextAttack;
+	private int projectileCount;
+	private String ID;
 	
 	//CONSTRUSTORS
 	
-	public Tower(Coordinate position, String priority, double range, double attackSpeed) {
+	public Tower(Coordinate position, String priority, double range, double attackSpeed, String ID) {
 		super(position);
 		this.priority = priority;
 		this.range = range;
 		this.attackSpeed = attackSpeed;
 		this.nextAttack = 0;
+		this.projectileCount = 0;
+		this.ID = ID;
 	}
 	
 	//GETTERS AND SETTERS
@@ -49,6 +53,27 @@ public abstract class Tower extends OnGameMap{
 	public double getAttackSpeed() {
 		return attackSpeed;
 	}
+	/**
+	 * getProjectileCount
+	 * @return a number used for IDing projectiles
+	 */
+	public int getProjectileCount() {
+		return projectileCount;
+	}
+	/**
+	 * setProjectileCount
+	 * @param count the new projectileCount
+	 */
+	public void setProjectileCount(int count) {
+		this.projectileCount = count;
+	}
+	/**
+	 * getID
+	 * @return the ID of this tower
+	 */
+	public String getID() {
+		return ID;
+	}
 	
 	//OTHER METHODS
 	/**
@@ -67,6 +92,6 @@ public abstract class Tower extends OnGameMap{
 	public abstract ArrayList<Projectile> update(LinkedList<Bloon> inRange, double elapsedTime); 
 	
 	public Coordinate extendPath(Bloon target) {
-		return new Coordinate((target.getPosition().getX() - getPosition().getX())*1000, (target.getPosition().getY() - getPosition().getY()));
+		return new Coordinate(getPosition().getX() + (target.getPosition().getX() - getPosition().getX())*1000, getPosition().getY() + (target.getPosition().getY() - getPosition().getY()));
 	}
 }

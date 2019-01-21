@@ -15,8 +15,8 @@ public class DartMonkey00 extends Tower{
 	
 	//CONSTRUCTORS
 	
-	public DartMonkey00(Coordinate position, String priority) {
-		super(position, priority, 100.0/700.0*MiscHelper.getMapLength(), 1.03);
+	public DartMonkey00(Coordinate position, String priority, String ID) {
+		super(position, priority, 100.0/700.0*MiscHelper.getMapLength(), 1.03, "DartMonkey" + ID);
 	}
 	
 	//GETTERS AND SETTERS
@@ -43,7 +43,8 @@ public class DartMonkey00 extends Tower{
 			ArrayList<Coordinate> path = new ArrayList<Coordinate>();
 			path.add(getPosition());
 			path.add(extendPath(target));
-			projectiles.add(new Dart(getPosition(), 1, path));
+			projectiles.add(new Dart(getPosition(), 1, path, getProjectileCount() + getID()));
+			setProjectileCount(getProjectileCount() + 1);
 		}
 		return projectiles;
 	}

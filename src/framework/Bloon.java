@@ -11,10 +11,11 @@ public abstract class Bloon extends Mobile{
 	private int rbeValue;
 	private HashMap<String, Integer> rank;
 	private int health;
+	private String ID;
 	
 	//CONSTRUCTORS
 	
-	public Bloon(double spawnTime, double moveSpeed, double radius, HashSet<String> resistances, int rbeValue, int health) {
+	public Bloon(double spawnTime, double moveSpeed, double radius, HashSet<String> resistances, int rbeValue, int health, String ID) {
 		super(new Coordinate(), moveSpeed, radius);
 		this.spawnTime = spawnTime;
 		this.pathNumber = 0;
@@ -22,6 +23,7 @@ public abstract class Bloon extends Mobile{
 		this.rbeValue = rbeValue;
 		this.rank = new HashMap<String, Integer>();
 		this.health = health;
+		this.ID = ID;
 	}
 	
 	//GETTERS AND SETTERS
@@ -78,6 +80,13 @@ public abstract class Bloon extends Mobile{
 	 */
 	public void setRank(String s, int i) {
 		rank.put(s, i);
+	}
+	/**
+	 * getID
+	 * @return the ID of this Bloon
+	 */
+	public String getID() {
+		return ID;
 	}
 	//OTHER METHODS
 	
